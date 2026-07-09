@@ -339,6 +339,81 @@ a:hover { text-decoration: underline; }
 .contact-avail { margin-top: 24px; font-size: 11px; color: #090; }
 .contact-avail::before { content: '● '; animation: blink 1.4s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  body {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* sidebar becomes a stacked top bar */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 2px solid #808080;
+  }
+  .sidebar-name { padding: 14px 12px; font-size: 24px; }
+  .sidebar-role { padding: 12px 12px; font-size: 10px; line-height: 1.5; }
+  .sidebar-nav { flex-direction: row; }
+  .nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    border-bottom: none;
+    border-right: 1px solid #808080;
+  }
+  .nav-item:last-child { border-right: none; }
+  .nav-item.active {
+    background: #a8a49e;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    padding: 12px 8px;
+  }
+  .sidebar-spacer { display: none; }
+
+  /* main scrolls with the page rather than internally */
+  .main {
+    height: auto;
+    border-right: none;
+    overflow-y: visible;
+  }
+  .section { padding: 24px 18px; }
+
+  /* work index rows */
+  .work-entry { gap: 10px; }
+  .we-year { width: 32px; }
+
+  /* project view */
+  .project-title { font-size: 20px; }
+  .project-slideshow {
+    padding: 16px 38px;
+    min-height: 260px;
+  }
+  .slides-wrap { min-height: 220px; }
+  .slide img { max-height: 62vh; }
+  .arrow-left { left: 4px; }
+  .arrow-right { right: 4px; }
+  .project-desc { max-width: 100%; }
+
+  /* bio header stacks image above text */
+  .bio-header {
+    flex-direction: column;
+    gap: 16px !important;
+  }
+  .bio-wrap p { font-size: 14px; text-align: left; }
+
+  /* lightbox controls sit closer to the edges */
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-close { top: 12px; right: 12px; }
+}
 </style>
 </head>
 <body>
@@ -440,7 +515,7 @@ a:hover { text-decoration: underline; }
   <!-- BIO -->
   <div class="section active" id="sec-bio">
     <div class="bio-wrap">
-      <div style="display:flex;gap:32px;align-items:flex-start;margin-bottom:24px">
+      <div class="bio-header" style="display:flex;gap:32px;align-items:flex-start;margin-bottom:24px">
         <img src="alice-photo.png" alt="4l1c3" style="width:120px;flex-shrink:0;border-top:2px solid #808080;border-left:2px solid #808080;border-bottom:2px solid #fff;border-right:2px solid #fff;">
         <div>
           <p>4l1c3 (b. 1997, tenerife) is a multidisciplinary artist, community builder and event organizer based in berlin.</p>
