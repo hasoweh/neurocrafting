@@ -268,8 +268,7 @@
     max-width: 90vw;
     max-height: 85vh;
     background: var(--xp-gray);
-    border: 2px solid;
-    border-color: #fff #848484 #848484 #fff;
+    border: none;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
     z-index: 100;
     flex-direction: column;
