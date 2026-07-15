@@ -715,8 +715,18 @@
     .desktop-icon .icon-img { font-size: 40px; }
     .desktop-icon span { font-size: 12px; }
 
-    /* decorations that only make sense with a mouse */
-    .desktop-mascot { display: none !important; }
+    /* keep the cat mascot, tucked into the bottom-right corner above the home bar */
+    .desktop-mascot {
+      display: block !important;
+      bottom: 52px !important;
+      right: 8px !important;
+      left: auto !important;
+      top: auto !important;
+      z-index: 10;
+    }
+    .desktop-mascot img { width: 72px; height: auto; }
+    /* its chatty speech bubble is too wide for a phone — hide it */
+    .desktop-mascot > div { display: none; }
 
     /* ---- WINDOWS become full-screen apps ---- */
     .xp-window { min-width: 0; }
