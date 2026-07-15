@@ -395,11 +395,40 @@ function hofUpdateStatus() {
   if (el) el.textContent = hofPhotos.length + ' photo' + (hofPhotos.length !== 1 ? 's' : '');
 }
 
+// Touch swipe support for the slideshow (mobile): swipe left = next,
+// swipe right = previous. Bound once, to the slide view container.
+let hofSwipeBound = false;
+function hofSwipeInit() {
+  if (hofSwipeBound) return;
+  const view = document.getElementById('hof-slide-view');
+  if (!view) return;
+  hofSwipeBound = true;
+  let startX = 0, startY = 0, tracking = false;
+  view.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) { tracking = false; return; }
+    tracking = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  view.addEventListener('touchend', e => {
+    if (!tracking) return;
+    tracking = false;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    // only count it as a swipe if it's mostly horizontal and past a threshold
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      hofStopAuto();
+      if (dx < 0) hofNext(); else hofPrev();
+    }
+  }, { passive: true });
+}
+
 // Hook into openWindow to init slideshow
 const _origOpenWindow = openWindow;
 openWindow = function(name) {
   _origOpenWindow(name);
-  if (name === 'halloffame') setTimeout(() => { hofSetView('grid'); hofInit(); }, 50);
+  if (name === 'halloffame') setTimeout(() => { hofSetView('grid'); hofInit(); hofSwipeInit(); }, 50);
 };
 
 // ====== MOBILE / HANDHELD ENHANCEMENTS ======
